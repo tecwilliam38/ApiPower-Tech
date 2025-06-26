@@ -79,6 +79,19 @@ async function Listar() {
     return users;
 }
 
+async function Editar(id_user, name, email, phone_number) {
 
+    const user = await repoUser.Editar(id_user, name, email, phone_number);
 
-export default { Inserir, Login, Profile, InserirAdmin, LoginAdmin, Listar, ProfileAdmin }
+    return user;
+}
+
+async function Excluir(id_user) {
+
+    const user = await repoUser.Excluir(id_user);
+
+    return user;
+}
+
+export default { Inserir, Login, Profile, 
+    InserirAdmin, LoginAdmin, Listar, ProfileAdmin, Editar, Excluir }

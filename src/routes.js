@@ -17,6 +17,8 @@ const router = Router();
 router.post("/users/register", controllerUser.Inserir);
 router.post("/users/login", controllerUser.Login);
 router.get("/users/profile", jwt.ValidateToken, controllerUser.ProfileAdmin);
+router.put("/users/:id_user", jwt.ValidateToken, controllerUser.Editar);
+router.delete("/users/:id_user", jwt.ValidateToken, controllerUser.Excluir);
 
 
 // Reservas (appointments)...

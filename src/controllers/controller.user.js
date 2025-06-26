@@ -69,4 +69,24 @@ async function Listar(req, res) {
     res.status(200).json(users);
 }
 
-export default { Inserir, Login, Profile, InserirAdmin, LoginAdmin, Listar, ProfileAdmin }
+async function Editar(req, res) {
+
+    const id_user = req.params.id_user;
+    const { name, email, phone_number } = req.body;
+
+    const user = await serviceUser.Editar(id_user, name, email, phone_number);
+
+    res.status(200).json(user);
+}
+
+async function Excluir(req, res) {
+
+    const id_user = req.params.id_user;
+
+    const user = await serviceUser.Excluir(id_user);
+
+    res.status(200).json(user);
+}
+
+export default { Inserir, Login, Profile, InserirAdmin, 
+    LoginAdmin, Listar, ProfileAdmin, Editar, Excluir }
