@@ -2,9 +2,28 @@ import pool from "../database/pool.index.js";
 import { query } from "../database/sqlite.js";
 
 async function Inserir(name, email, phone_number, password, created_at, updated_at) {
-    let sql = `insert into powertech_users(name, email, phone_number, password, created_at, updated_at) values($1, $2, $3, $4, current_timestamp, current_timestamp)
-        returning id_user`;
-    try {
+    async function verificaEmailExistente(email) {
+        try {
+            const query = 'SELECT count(*) FROM powertech_users WHERE email = $1';
+            const result = await pool.query(query, [email]);
+
+            return result.rows[0].count > 0; // Retorna true se o email já existe
+        } catch (error) {
+            console.error('Erro ao verificar email:', error);
+            return false;
+        }
+    }
+
+     const emailJaExiste = await verificaEmailExistente(email);
+    if (emailJaExiste) {
+        console.log('Email já cadastrado.');
+        return [];
+    } else {
+        // console.log('Email disponível para cadastro.');         
+        let sql = `insert into powertech_users(name, email, phone_number, password, created_at, updated_at) values($1, $2, $3, $4, current_timestamp, current_timestamp)
+            returning id_user`;
+
+         try {
         const results = await pool.query(`
                 SELECT *
                 FROM powertech_users
@@ -15,6 +34,10 @@ async function Inserir(name, email, phone_number, password, created_at, updated_
         const user = await pool.query(sql, [name, email, phone_number, password]);
         return user.rows[0];
     }
+    }
+
+
+   
 }
 
 async function InserirAdmin(name, email, phone_number, password, created_at, updated_at) {
