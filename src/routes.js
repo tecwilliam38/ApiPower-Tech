@@ -1,8 +1,8 @@
 import { Router } from "express";
-// import controllerDoctor from "./controllers/controller.doctor.js";
 import controllerUser from "./controllers/controller.user.js";
 // import controllerAppointment from "./controllers/controller.appointment.js";
 import jwt from "./token.js";
+import controllerTecnico from "./controllers/controller.tecnico.js";
 
 const router = Router();
 
@@ -12,6 +12,12 @@ const router = Router();
 // router.put("/doctors/:id_doctor", jwt.ValidateToken, controllerDoctor.Editar);
 // router.delete("/doctors/:id_doctor", jwt.ValidateToken, controllerDoctor.Excluir);
 // router.get("/doctors/:id_doctor/services", jwt.ValidateToken, controllerDoctor.ListarServicos);
+// Tecnicos...
+router.get("/tecnicos/listar", jwt.ValidateToken, controllerTecnico.Listar);
+router.post("/tecnicos/register", jwt.ValidateToken, controllerTecnico.Inserir);
+// router.put("/tecnicos/:id_tecnico", jwt.ValidateToken, controllerTecnico.Editar);
+// router.delete("/tecnicos/:id_tecnico", jwt.ValidateToken, controllerTecnico.Excluir);
+router.get("/tecnicos/:id_tecnico", jwt.ValidateToken, controllerTecnico.ListarServicos);
 
 // Users...
 router.post("/users/register", controllerUser.Inserir);

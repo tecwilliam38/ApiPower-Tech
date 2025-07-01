@@ -1,11 +1,12 @@
 import bcrypt from "bcrypt";
-import repoUser from "../repositories/repository.user.js";
+
 import jwt from "../token.js";
+import repoUser from "../repositories/repository.user.js";
 
 async function Inserir(name, email, phone_number, password) {
 
     const hashPassword = await bcrypt.hash(password, 10);
-    const user = await repoUser.Inserir(name, email, phone_number, hashPassword);
+    const user = await repositoryUser.Inserir(name, email, phone_number, hashPassword);
 
     user.token = jwt.CreateToken(user.id_user);
 
