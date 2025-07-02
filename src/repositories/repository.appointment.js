@@ -49,7 +49,7 @@ async function Listar(id_client, dt_start, dt_end, id_tecnico) {
 
     let sql = `select pa.id_appointment, ps.description as service, 
     pt.name as tecnico, pt.specialty,
-   pa.booking_date, pa.booking_hour, pc.name as cliente,
+   pa.booking_date, pa.booking_hour, pts.price, pc.name as cliente,
    pa.id_service, pa.id_client
    from powertech_appointments pa
    join powertech_services ps on (ps.id_service = pa.id_service)
