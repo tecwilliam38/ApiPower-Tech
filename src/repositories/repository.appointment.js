@@ -49,15 +49,15 @@ async function Listar(id_client, dt_start, dt_end, id_tecnico) {
 
     let sql = `select pa.id_appointment, ps.description as service, 
     pt.name as tecnico, pt.specialty,
-   pa.booking_date, pa.booking_hour, pc.name as cliente, pts.price, pa.id_tecnico, 
+   pa.booking_date, pa.booking_hour, pc.name as cliente,
    pa.id_service, pa.id_client
-from powertech_appointments pa
-join powertech_services ps on (ps.id_service = pa.id_service)
-join powertech_tecnicos pt on (pt.id_tecnico = pa.id_tecnico)
-join powertech_client pc on (pc.id_client = pa.id_client)
-join powertech_tecnicos_services pts on (pts.id_tecnico = pa.id_tecnico and 
-                        pts.id_service = pa.id_service)
-where pa.id_appointment > 0 `;
+   from powertech_appointments pa
+   join powertech_services ps on (ps.id_service = pa.id_service)
+   join powertech_tecnicos pt on (pt.id_tecnico = pa.id_tecnico)
+   join powertech_client pc on (pc.id_client = pa.id_client)
+   left join powertech_tecnicos_services pts
+   on pts.id_tecnico = pa.id_tecnico and pts.id_service = pa.id_service
+   where pa.id_appointment > 0 `;
 
     if (id_client) {
         filtro.push(id_client);
@@ -79,11 +79,11 @@ where pa.id_appointment > 0 `;
         sql += " AND pa.id_tecnico = $" + filtro.length;
     }
 
-    sql = sql + " order by pa.booking_date, pa.booking_hour";
+    sql += " order by pa.booking_date, pa.booking_hour";
 
     const appointments = await pool.query(sql, filtro);
 
-    return appointments;
+    return appointments.rows;
 }
 
 // async function ListarId(id_appointment) {
