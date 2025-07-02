@@ -1,6 +1,6 @@
 import { Router } from "express";
 import controllerUser from "./controllers/controller.user.js";
-// import controllerAppointment from "./controllers/controller.appointment.js";
+import controllerAppointment from "./controllers/controller.appointment.js";
 import jwt from "./token.js";
 import controllerTecnico from "./controllers/controller.tecnico.js";
 
@@ -37,12 +37,20 @@ router.delete("/users/:id_user", jwt.ValidateToken, controllerUser.Excluir);
 router.post("/admin/register", controllerUser.InserirAdmin);
 router.post("/admin/login", controllerUser.LoginAdmin);
 router.get("/admin/profile", jwt.ValidateToken, controllerUser.ProfileAdmin);
-// router.get("/admin/appointments", jwt.ValidateToken, controllerAppointment.Listar);
+router.get("/admin/appointments", jwt.ValidateToken, controllerAppointment.Listar);
 // router.get("/admin/users", jwt.ValidateToken, controllerUser.Listar);
 // router.get("/admin/appointments/:id_appointment", jwt.ValidateToken, controllerAppointment.ListarId);
 // router.post("/admin/appointments", jwt.ValidateToken, controllerAppointment.InserirAdmin);
 // router.put("/admin/appointments/:id_appointment", jwt.ValidateToken, controllerAppointment.EditarAdmin);
-
+// router.post("/admin/register", controllerUser.InserirAdmin);
+// router.post("/admin/login", controllerUser.LoginAdmin);
+// router.get("/admin/agenda",jwt.ValidateToken, controllerAppointment.Listar);
+// router.put("/admin/agenta/:id_appointment", jwt.ValidateToken, controllerAppointment.EditarAdmin);
+// router.get("/admin/users", jwt.ValidateToken, controllerUser.Listar);
+// router.get("/admin/agenda/:id_appointment", jwt.ValidateToken, controllerAppointment.ListarId);
+// router.post("/admin/agenda", jwt.ValidateToken, controllerAppointment.InserirAgendaAdmin);
+// router.put("/admin/agenda/:id_appointment", jwt.ValidateToken, controllerAppointment.EditarAgenda);
+// router.get("/admin/profile", jwt.ValidateToken, controllerUser.ProfileAdmin);
 
 
 export default router;

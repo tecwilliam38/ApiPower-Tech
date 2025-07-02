@@ -142,6 +142,7 @@ async function Excluir(id_user) {
     return { id_user };
 }
 async function ListarServicos(id_tecnico) {
+// o erro estava no pool.query, onde faltava o pool
 
     let sql = `select pts.id_service, s.description, pts.price
     from powertech_tecnicos_services pts
