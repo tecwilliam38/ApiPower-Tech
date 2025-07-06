@@ -3,6 +3,7 @@ import controllerUser from "./controllers/controller.user.js";
 import controllerAppointment from "./controllers/controller.appointment.js";
 import jwt from "./token.js";
 import controllerTecnico from "./controllers/controller.tecnico.js";
+import controllerClient from "./controllers/controller.client.js";
 
 const router = Router();
 
@@ -20,7 +21,7 @@ router.post("/tecnicos/register", jwt.ValidateToken, controllerTecnico.Inserir);
 router.get("/tecnicos/:id_tecnico", jwt.ValidateToken, controllerTecnico.ListarServicos);
 
 // Users/Clientes...
-router.get("/clients/listar", jwt.ValidateToken, controllerTecnico.Listar);
+router.get("/client/listar", jwt.ValidateToken, controllerClient.Listar);
 router.post("/users/register", controllerUser.Inserir);
 router.post("/users/login", controllerUser.Login);
 router.get("/users/profile", jwt.ValidateToken, controllerUser.ProfileAdmin);

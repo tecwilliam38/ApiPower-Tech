@@ -1,3 +1,4 @@
+import serviceClient from "../services/service.client.js";
 
 
 async function Inserir(req, res) {
@@ -19,9 +20,9 @@ async function Profile(req, res) {
 
 async function Listar(req, res) {
 
-    const users = await serviceClient.Listar();
+    const client = await serviceClient.Listar();
 
-    res.status(200).json(users);
+    res.status(200).json(client);
 }
 
 async function Editar(req, res) {

@@ -75,9 +75,9 @@ async function ProfileAdmin(id_admin) {
 
 async function Listar() {
 
-    const users = await repoUser.Listar();
+    const client = await repoClient.Listar();
 
-    return users;
+    return client;
 }
 
 async function Editar(id_user, name, email, phone_number) {
