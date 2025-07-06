@@ -3,14 +3,16 @@ import bcrypt from "bcrypt";
 import jwt from "../token.js";
 import repoClient from "../repositories/repository.client.js";
 
-async function Inserir(name, email, phone_number, password) {
+async function Inserir(name, doc_id, endereco_rua, endereco_bairro,
+    endereco_cidade, phone_contato, task, email, password) {
 
     const hashPassword = await bcrypt.hash(password, 10);
-    const user = await repoClient.Inserir(name, email, phone_number, hashPassword);
+    const client = await repoClient.Inserir(name, doc_id, endereco_rua, endereco_bairro,
+        endereco_cidade, phone_contato, task, email, hashPassword);
 
-    user.token = jwt.CreateToken(user.id_user);
+    client.token = jwt.CreateToken(client.id_client);
 
-    return user;
+    return client;
 }
 
 async function InserirAdmin(name, email, phone_number, password) {
@@ -66,12 +68,6 @@ async function Profile(id_user) {
     return user;
 }
 
-async function ProfileAdmin(id_admin) {
-
-    const admin = await repoUser.ProfileAdmin(id_admin);
-
-    return admin;
-}
 
 async function Listar() {
 
@@ -94,5 +90,7 @@ async function Excluir(id_user) {
     return user;
 }
 
-export default { Inserir, Login, Profile, 
-    InserirAdmin, LoginAdmin, Listar, ProfileAdmin, Editar, Excluir }
+export default {
+    Inserir, Login, Profile,
+    InserirAdmin, LoginAdmin, Listar, Editar, Excluir
+}

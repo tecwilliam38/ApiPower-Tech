@@ -22,11 +22,11 @@ router.get("/tecnicos/:id_tecnico", jwt.ValidateToken, controllerTecnico.ListarS
 
 // Users/Clientes...
 router.get("/client/listar", jwt.ValidateToken, controllerClient.Listar);
-router.post("/users/register", controllerUser.Inserir);
-router.post("/users/login", controllerUser.Login);
-router.get("/users/profile", jwt.ValidateToken, controllerUser.ProfileAdmin);
-router.put("/users/:id_user", jwt.ValidateToken, controllerUser.Editar);
-router.delete("/users/:id_user", jwt.ValidateToken, controllerUser.Excluir);
+router.post("/client/register", controllerClient.Inserir);
+// router.post("/users/login", controllerClient.Login);
+// router.get("/users/profile", jwt.ValidateToken, controllerUser.ProfileAdmin);
+// router.put("/users/:id_user", jwt.ValidateToken, controllerUser.Editar);
+// router.delete("/users/:id_user", jwt.ValidateToken, controllerUser.Excluir);
 
 
 // Reservas (appointments)...

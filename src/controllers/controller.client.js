@@ -3,9 +3,11 @@ import serviceClient from "../services/service.client.js";
 
 async function Inserir(req, res) {
 
-    const { name, email, phone_number, password } = req.body;
+    const { name, doc_id, endereco_rua, endereco_bairro,
+    endereco_cidade, phone_contato, task, email, password} = req.body;
 
-    const user = await serviceClient.Inserir(name, email, phone_number, password);
+    const user = await serviceClient.Inserir(name, doc_id, endereco_rua, endereco_bairro,
+    endereco_cidade, phone_contato, task, email, password);
 
     res.status(201).json(user);
 }
