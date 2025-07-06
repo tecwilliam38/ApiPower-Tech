@@ -124,11 +124,13 @@ async function ProfileAdmin(id_admin) {
 }
 
 async function Listar() {
+         
+    // let sql = `select id_user, name, email from users order by name`;
+    // let sql = `select id_client, name,doc_id, endereco_rua, endereco_bairro, endereco_cidade, phone_contato, email from powertech_client order by name`;
+    let sql = `select id_client, name, doc_id, endereco_rua, phone_contato, email from powertech_client order by name`;
 
-    let sql = `select id_user, name, email from users order by name`;
-
-    const users = await pool.query(sql, []);
-    return users;
+    const clients = await pool.query(sql, []);
+    return clients.rows;
 }
 
 async function Editar(id_user, name, email, phone_number) {
