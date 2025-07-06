@@ -23,14 +23,11 @@ async function Inserir(
             return { erro: 'Email já cadastrado' };
 
         }
-
         console.log('Email disponível para cadastro.');
-
         const sqlInsert = `
-            INSERT INTO powertech_client (
-                name, doc_id, endereco_rua, endereco_bairro,
-                endereco_cidade, phone_contato, task, email, password
-            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+            INSERT INTO powertech_client (name, doc_id, endereco_rua, endereco_bairro,
+                endereco_cidade, phone_contato, task, email, password)
+                VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
             RETURNING id_client;
         `;
 
@@ -46,13 +43,13 @@ async function Inserir(
     }
 }
 
-async function Profile(id_user) {
-    let sql = `select id_user, name as tecnico, email, 
-    phone_number as celular from powertech_users where id_user = $1`;
+// async function Profile(id_user) {
+//     let sql = `select id_user, name as tecnico, email, 
+//     phone_number as celular from powertech_users where id_user = $1`;
 
-    const user = await pool.query(sql, [id_user]);
-    return user.rows[0];
-}
+//     const user = await pool.query(sql, [id_user]);
+//     return user.rows[0];
+// }
 async function Listar() {
 
     let sql = `select id_client, name, doc_id as cne, endereco_rua, endereco_bairro, 
