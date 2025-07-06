@@ -20,7 +20,8 @@ async function Inserir(
         const emailJaExiste = await verificaEmailExistente(email);
         if (emailJaExiste) {
             console.log('Email já cadastrado.');
-            return [];
+            return { erro: 'Email já cadastrado' };
+
         }
 
         console.log('Email disponível para cadastro.');
@@ -30,7 +31,7 @@ async function Inserir(
                 name, doc_id, endereco_rua, endereco_bairro,
                 endereco_cidade, phone_contato, task, email, password
             ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-            RETURNING id_client
+            RETURNING id_client;
         `;
 
         const result = await pool.query(sqlInsert, [
@@ -68,7 +69,7 @@ async function InserirAdmin(name, email, phone_number, password, created_at, upd
         // console.log('Email disponível para cadastro.'); 
         let sql = `insert into powertech_admin(name, email, phone_number, password, created_at, updated_at) 
         values($1, $2, $3, $4, current_timestamp, current_timestamp)
-        returning id_admin`;
+        returning id_admin;`;
 
         try {
             const results = await pool.query(`
