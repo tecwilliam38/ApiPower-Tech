@@ -46,48 +46,6 @@ async function Inserir(
     }
 }
 
-
-async function InserirAdmin(name, email, phone_number, password, created_at, updated_at) {
-
-    async function verificaEmailExistente(email) {
-        try {
-            const query = 'SELECT count(*) FROM powertech_admin WHERE email = $1';
-            const result = await pool.query(query, [email]);
-
-            return result.rows[0].count > 0; // Retorna true se o email já existe
-        } catch (error) {
-            console.error('Erro ao verificar email:', error);
-            return false;
-        }
-    }
-
-    const emailJaExiste = await verificaEmailExistente(email);
-    if (emailJaExiste) {
-        console.log('Email já cadastrado.');
-        return [];
-    } else {
-        // console.log('Email disponível para cadastro.'); 
-        let sql = `insert into powertech_admin(name, email, phone_number, password, created_at, updated_at) 
-        values($1, $2, $3, $4, current_timestamp, current_timestamp)
-        returning id_admin;`;
-
-        try {
-            const results = await pool.query(`
-                SELECT *
-                FROM powertech_admin
-                WHERE email = ${email};
-                `);
-            console.log(results);
-
-            return results.rows;
-        } catch (e) {
-            const admin = await pool.query(sql, [name, email, phone_number, password]);
-            return admin.rows[0];
-        }
-    }
-}
-
-
 async function Profile(id_user) {
     let sql = `select id_user, name as tecnico, email, 
     phone_number as celular from powertech_users where id_user = $1`;
@@ -123,6 +81,4 @@ async function Excluir(id_user) {
 
 
 
-export default {
-    Inserir, InserirAdmin, Listar, Editar, Excluir
-}
+export default { Inserir, Listar, Editar, Excluir }

@@ -15,58 +15,12 @@ async function Inserir(name, doc_id, endereco_rua, endereco_bairro,
     return client;
 }
 
-async function InserirAdmin(name, email, phone_number, password) {
+    // async function Profile(id_user) {
 
-    const hashPassword = await bcrypt.hash(password, 10);
-    const admin = await repoClient.InserirAdmin(name, email, phone_number, hashPassword);
+    //     const user = await repoUser.Profile(id_user);
 
-    admin.token = jwt.CreateToken(admin.id_admin);
-
-    return admin;
-}
-
-async function Login(email, password) {
-
-    const user = await repoClient.ListarByEmail(email);
-
-    if (user.length == 0)
-        return [];
-    else {
-        if (await bcrypt.compare(password, user.password)) {
-            delete user.password;
-
-            user.token = jwt.CreateToken(user.id_user);
-
-            return user;
-        } else
-            return [];
-    }
-}
-
-async function LoginAdmin(email, password) {
-
-    const admin = await repoUser.ListarByEmailAdmin(email);
-
-    if (!admin)
-        return null;
-    else {
-        if (await bcrypt.compare(password, admin.password)) {
-            delete admin.password;
-
-            admin.token = jwt.CreateToken(admin.id_admin);
-
-            return admin;
-        } else
-            return [];
-    }
-}
-
-async function Profile(id_user) {
-
-    const user = await repoUser.Profile(id_user);
-
-    return user;
-}
+    //     return user;
+    // }
 
 
 async function Listar() {
@@ -90,7 +44,4 @@ async function Excluir(id_user) {
     return user;
 }
 
-export default {
-    Inserir, Login, Profile,
-    InserirAdmin, LoginAdmin, Listar, Editar, Excluir
-}
+export default { Inserir, Listar, Editar, Excluir }
