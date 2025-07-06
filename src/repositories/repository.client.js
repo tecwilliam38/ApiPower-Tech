@@ -96,11 +96,8 @@ async function Profile(id_user) {
 }
 async function Listar() {
 
-    // let sql = `select id_user, name, email from users order by name`;
-    let sql = `select id_client, name,doc_id as cne, endereco_rua, endereco_bairro, 
+    let sql = `select id_client, name, doc_id as cne, endereco_rua, endereco_bairro, 
     task as tarefa, endereco_cidade, phone_contato, email from powertech_client order by name`;
-    // let sql = `select id_client, name, doc_id, endereco_rua, phone_contato, email from powertech_client order by name`;
-
     const clients = await pool.query(sql, []);
     return clients.rows;
 }
