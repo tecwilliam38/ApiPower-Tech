@@ -6,7 +6,7 @@ const router = Router();
 
 // Tecnicos
 router.get("/tecnicos/listar", jwt.ValidateToken, controllerTecnico.Listar);
-
+router.post("/tecnicos/inserir", jwt.ValidateToken, controllerTecnico.Inserir);
 // Adm
 
 // Clients

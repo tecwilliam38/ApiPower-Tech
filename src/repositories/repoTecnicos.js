@@ -13,8 +13,6 @@ async function verificaEmailExistente(email) {
     }
 }
 async function Inserir(name, cel_phone, endereco, email, specialty, password, created_at, updated_at) {
-
-
     const emailJaExiste = await verificaEmailExistente(email);
     if (emailJaExiste) {
         console.log('Email já cadastrado.');
