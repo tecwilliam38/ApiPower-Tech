@@ -1,12 +1,4 @@
-import serviceTecnicos from "../services/serviceTecnico.js";
-
-async function Inserir(req, res) {
-    const { name, cel_phone, endereco, email, specialty, password } = req.body;
-
-    const tecnicos = await serviceTecnicos.Inserir(name, cel_phone, endereco, email, specialty, password);
-
-    res.status(201).json(tecnicos);
-}
+import serviceTecnicos from "../services/service.tecnico.js";
 
 async function Listar(req, res) {
 
@@ -14,6 +6,14 @@ async function Listar(req, res) {
     const tecnicos = await serviceTecnicos.Listar(name);
 
     res.status(200).json(tecnicos);
+}
+
+async function Inserir(req, res) {
+    const { name, cel_phone, endereco, email, specialty, password } = req.body;
+
+    const tecnicos = await serviceTecnicos.Inserir(name, cel_phone, endereco, email, specialty, password);
+
+    res.status(201).json(tecnicos);
 }
 
 async function Editar(req, res) {
