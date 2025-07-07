@@ -2,9 +2,11 @@ import { Router } from "express";
 import controllerUser from "./controllers/controller.user.js";
 import controllerAppointment from "./controllers/controller.appointment.js";
 import jwt from "./token.js";
-import controllerTecnico from "./controllers/controllerTecnico.js";
 import controllerClient from "./controllers/controller.client.js";
+
+// New Routes
 import controllerAdmin from "./controllers/controllerAdmin.js";
+import controllerTecnico from "./controllers/controllerTecnico.js";
 
 const router = Router();
 
