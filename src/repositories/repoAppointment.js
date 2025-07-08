@@ -21,7 +21,7 @@ async function Listar(id_client, dt_start, dt_end, id_tecnico) {
         filtro.push(id_client);
         sql += " AND pa.id_client = $" + filtro.length;
     } else {
-        console.log("Alguns id_client não foram informados.");
+            //  
     }
 
     if (dt_start) {
