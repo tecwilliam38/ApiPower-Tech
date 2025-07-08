@@ -28,6 +28,7 @@ router.put("/client/:id_client", jwt.ValidateToken, controllerClient.Editar);
 // Appointments
 router.post("/appointments/insert", jwt.ValidateToken, controllerAppointment.Inserir);
 router.get("/appointments/listar", jwt.ValidateToken, controllerAppointment.ListarByUser);
+router.get("/appointments/listar/:id_appointment", jwt.ValidateToken, controllerAppointment.ListarId);
 router.put("/appointments/edit/:id_appointment", jwt.ValidateToken, controllerAppointment.EditarAdmin);
 router.delete("/appointments/:id_appointment", jwt.ValidateToken, controllerAppointment.Excluir);
 

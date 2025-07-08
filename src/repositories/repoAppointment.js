@@ -21,7 +21,7 @@ async function Listar(id_client, dt_start, dt_end, id_tecnico) {
         filtro.push(id_client);
         sql += " AND pa.id_client = $" + filtro.length;
     } else {
-            //  
+        //  
     }
 
     if (dt_start) {
@@ -45,6 +45,25 @@ async function Listar(id_client, dt_start, dt_end, id_tecnico) {
 
     return appointments.rows;
 }
+async function ListarId(id_appointment) {
+
+    let sql = `select pa.id_appointment, s.description as service, 
+    pt.name as tecnico, pt.specialty,
+   pa.booking_date, pa.booking_hour, pc.name as client, pts.price, pa.id_tecnico, 
+   pa.id_service, pa.id_client
+from powertech_appointments pa
+join powertech_services s on (s.id_service = pa.id_service)
+join powertech_tecnicos pt on (pt.id_tecnico = pa.id_tecnico)
+join powertech_client pc on (pc.id_client = pa.id_client)
+left join powertech_tecnicos_services pts on (pts.id_tecnico = pa.id_tecnico and 
+                        pts.id_service = pa.id_service)
+where pa.id_appointment = $1 `;
+
+    const appointments = await pool.query(sql, [id_appointment]);
+    console.log(appointments.rows);
+
+    return appointments.rows;
+}
 async function Inserir(id_client, id_tecnico, id_service, booking_date, booking_hour) {
 
     let sql = `insert into powertech_appointments(id_client,
@@ -52,7 +71,7 @@ async function Inserir(id_client, id_tecnico, id_service, booking_date, booking_
          values($1, $2, $3, $4, $5) returning id_appointment`;
     try {
         const appointment = await pool.query(sql, [id_client,
-        id_tecnico, id_service, booking_date, booking_hour]);
+            id_tecnico, id_service, booking_date, booking_hour]);
 
         return appointment.rows[0];
     } catch (err) {
@@ -100,4 +119,4 @@ async function ListarServicos(id_tecnico) {
         console.log(err);
     }
 }
-export default { Listar, Inserir, Excluir, Editar };
+export default { Listar, Inserir, Excluir, Editar, ListarServicos, ListarId };
