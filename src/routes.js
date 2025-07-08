@@ -28,6 +28,7 @@ router.post("/client/register", controllerClient.Inserir);
 router.post("/appointments/insert", jwt.ValidateToken, controllerAppointment.Inserir);
 router.get("/appointments/listar", jwt.ValidateToken, controllerAppointment.ListarByUser);
 router.delete("/appointments/:id_appointment", jwt.ValidateToken, controllerAppointment.Excluir);
+router.put("/admin/appointments/:id_appointment", jwt.ValidateToken, controllerAppointment.EditarAdmin);
 
 
 // Doctors...
@@ -52,7 +53,6 @@ router.delete("/appointments/:id_appointment", jwt.ValidateToken, controllerAppo
 // router.get("/admin/users", jwt.ValidateToken, controllerUser.Listar);
 // router.get("/admin/appointments/:id_appointment", jwt.ValidateToken, controllerAppointment.ListarId);
 // router.post("/admin/appointments", jwt.ValidateToken, controllerAppointment.InserirAdmin);
-// router.put("/admin/appointments/:id_appointment", jwt.ValidateToken, controllerAppointment.EditarAdmin);
 // router.post("/admin/register", controllerUser.InserirAdmin);
 // router.post("/admin/login", controllerUser.LoginAdmin);
 // router.get("/admin/agenda",jwt.ValidateToken, controllerAppointment.Listar);

@@ -57,4 +57,29 @@ async function Inserir(id_client, id_tecnico, id_service, booking_date, booking_
         throw err; // ou return { success: false, error: err.message };
     }
 }
-export default { Listar, Inserir }
+async function Editar(id_appointment, id_client,
+     id_tecnico, id_service, booking_date, booking_hour) {
+
+     let sql = `update powertech_appointments set id_client=$1, id_tecnico=$2, 
+     id_service=$3, booking_date=$4, booking_hour=$5 
+     where id_appointment=$0`;
+
+     await pool.query(sql, [id_client,
+         id_tecnico, id_service, booking_date, booking_hour, id_appointment]);
+
+     return { id_appointment };
+ }
+async function Excluir(id_appointment) {
+
+     let sql = `delete from powertech_appointments where id_appointment = $1`;
+
+     try {
+          const appointment = await pool.query(sql, [id_appointment]);
+
+          return { id_appointment };
+     } catch (err) {
+          console.log(err);
+
+     }
+}
+export default { Listar, Inserir, Excluir, Editar };
