@@ -118,7 +118,8 @@ async function ProfileAdmin(id_admin) {
 
 async function Listar() {
 
-    let sql = `select id_tecnico, name, email, endereco, cel_phone, specialty as skill from powertech_tecnicos order by name`;
+    let sql = `select id_tecnico, name, email, endereco, 
+    cel_phone, specialty as skill from powertech_tecnicos order by name`;
 
     const tecnicos = await pool.query(sql, []);
     return tecnicos.rows;

@@ -16,11 +16,12 @@ async function Listar(id_client, dt_start, dt_end, id_tecnico) {
    on pts.id_tecnico = pa.id_tecnico and pts.id_service = pa.id_service
    where pa.id_appointment > 0 `;
 
+
     if (!id_client) {
         filtro.push(id_client);
         sql += " AND pa.id_client = $" + filtro.length;
     } else {
-        console.log("sem id_client");
+        console.log("Alguns id_client não foram informados.");
     }
 
     if (dt_start) {
@@ -51,7 +52,7 @@ async function Inserir(id_client, id_tecnico, id_service, booking_date, booking_
          values($1, $2, $3, $4, $5) returning id_appointment`;
     try {
         const appointment = await pool.query(sql, [id_client,
-            id_tecnico, id_service, booking_date, booking_hour]);
+        id_tecnico, id_service, booking_date, booking_hour]);
 
         return appointment.rows[0];
     } catch (err) {
@@ -65,7 +66,7 @@ async function Editar(id_appointment, id_client,
 
     let sql = `update powertech_appointments set id_client=$1, id_tecnico=$2, 
      id_service=$3, booking_date=$4, booking_hour=$5 
-     where id_appointment=$0`;
+     where id_appointment=$6`;
 
     await pool.query(sql, [id_client,
         id_tecnico, id_service, booking_date, booking_hour, id_appointment]);
