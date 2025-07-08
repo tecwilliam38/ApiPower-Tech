@@ -59,10 +59,9 @@ left join powertech_tecnicos_services pts on (pts.id_tecnico = pa.id_tecnico and
                         pts.id_service = pa.id_service)
 where pa.id_appointment = $1 `;
 
-    const appointments = await pool.query(sql, [id_appointment]);
-    console.log(appointments.rows);
+    const appointments = await pool.query(sql, [id_appointment]);   
 
-    return appointments.rows;
+    return appointments.rows[0];
 }
 async function Inserir(id_client, id_tecnico, id_service, booking_date, booking_hour) {
 
