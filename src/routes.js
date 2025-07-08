@@ -1,23 +1,23 @@
 import { Router } from "express";
-import controllerUser from "./controllers/controller.user.js";
 import jwt from "./token.js";
-import controllerClient from "./controllers/controller.client.js";
+
 
 // New Routes
 import controllerAdmin from "./controllers/controllerAdmin.js";
 import controllerTecnico from "./controllers/controllerTecnico.js";
 import controllerAppointment from "./controllers/controllerAppointment.js";
+import controllerClient from "./controllers/controllerClient.js";
 
 const router = Router();
 // Rotas do Admin...
 router.post("/admin/register", controllerAdmin.InserirAdmin);
-router.post("/admin/login", controllerUser.LoginAdmin);
+router.post("/admin/login", controllerAdmin.LoginAdmin);
 router.get("/admin/listar", jwt.ValidateToken, controllerAdmin.ListarAdmin);
 router.get("/admin/appointments", jwt.ValidateToken, controllerAppointment.Listar);
 
 // Tecnicos...
 router.get("/tecnicos/listar", jwt.ValidateToken, controllerTecnico.Listar);
-router.post("/tecnicos/registrar", jwt.ValidateToken, controllerTecnico.Inserir);
+router.post("/tecnicos/register", jwt.ValidateToken, controllerTecnico.Inserir);
 router.get("/tecnicos/:id_tecnico", jwt.ValidateToken, controllerTecnico.ListarServicos);
 
 // Clientes...
