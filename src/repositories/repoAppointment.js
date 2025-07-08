@@ -16,9 +16,11 @@ async function Listar(id_client, dt_start, dt_end, id_tecnico) {
    on pts.id_tecnico = pa.id_tecnico and pts.id_service = pa.id_service
    where pa.id_appointment > 0 `;
 
-    if (id_client) {
+    if (!id_client) {
         filtro.push(id_client);
         sql += " AND pa.id_client = $" + filtro.length;
+    } else {
+        console.log("sem id_client");
     }
 
     if (dt_start) {
@@ -39,6 +41,8 @@ async function Listar(id_client, dt_start, dt_end, id_tecnico) {
     sql += " order by pa.booking_date, pa.booking_hour";
 
     const appointments = await pool.query(sql, filtro);
+    // console.log("SQL:", sql);
+    // console.log("Filtros:", filtro);
 
     return appointments.rows;
 }
@@ -58,28 +62,28 @@ async function Inserir(id_client, id_tecnico, id_service, booking_date, booking_
     }
 }
 async function Editar(id_appointment, id_client,
-     id_tecnico, id_service, booking_date, booking_hour) {
+    id_tecnico, id_service, booking_date, booking_hour) {
 
-     let sql = `update powertech_appointments set id_client=$1, id_tecnico=$2, 
+    let sql = `update powertech_appointments set id_client=$1, id_tecnico=$2, 
      id_service=$3, booking_date=$4, booking_hour=$5 
      where id_appointment=$0`;
 
-     await pool.query(sql, [id_client,
-         id_tecnico, id_service, booking_date, booking_hour, id_appointment]);
+    await pool.query(sql, [id_client,
+        id_tecnico, id_service, booking_date, booking_hour, id_appointment]);
 
-     return { id_appointment };
- }
+    return { id_appointment };
+}
 async function Excluir(id_appointment) {
 
-     let sql = `delete from powertech_appointments where id_appointment = $1`;
+    let sql = `delete from powertech_appointments where id_appointment = $1`;
 
-     try {
-          const appointment = await pool.query(sql, [id_appointment]);
+    try {
+        const appointment = await pool.query(sql, [id_appointment]);
 
-          return { id_appointment };
-     } catch (err) {
-          console.log(err);
+        return { id_appointment };
+    } catch (err) {
+        console.log(err);
 
-     }
+    }
 }
 export default { Listar, Inserir, Excluir, Editar };
