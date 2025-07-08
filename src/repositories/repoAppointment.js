@@ -86,4 +86,18 @@ async function Excluir(id_appointment) {
 
     }
 }
+async function ListarServicos(id_tecnico) {
+
+    let sql = `select pts.id_service, s.description, pts.price
+    from powertech_tecnicos_services pts
+    join powertech_services s on (s.id_service = pts.id_service)
+    where pts.id_tecnico = $1
+    order by s.description`;
+    try {
+        const serv = await pool.query(sql, [id_tecnico]);
+        return serv.rows;
+    } catch (err) {
+        console.log(err);
+    }
+}
 export default { Listar, Inserir, Excluir, Editar };
