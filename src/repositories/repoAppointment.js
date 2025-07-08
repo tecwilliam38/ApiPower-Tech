@@ -41,8 +41,6 @@ async function Listar(id_client, dt_start, dt_end, id_tecnico) {
     sql += " order by pa.booking_date, pa.booking_hour";
 
     const appointments = await pool.query(sql, filtro);
-    // console.log("SQL:", sql);
-    // console.log("Filtros:", filtro);
 
     return appointments.rows;
 }
@@ -61,6 +59,7 @@ async function Inserir(id_client, id_tecnico, id_service, booking_date, booking_
         throw err; // ou return { success: false, error: err.message };
     }
 }
+
 async function Editar(id_appointment, id_client,
     id_tecnico, id_service, booking_date, booking_hour) {
 
