@@ -23,6 +23,7 @@ router.get("/tecnicos/:id_tecnico", jwt.ValidateToken, controllerTecnico.ListarS
 // Clientes...
 router.get("/client/listar", jwt.ValidateToken, controllerClient.Listar);
 router.post("/client/register", controllerClient.Inserir);
+router.put("/client/:id_client", jwt.ValidateToken, controllerClient.Editar);
 
 // Appointments
 router.post("/appointments/insert", jwt.ValidateToken, controllerAppointment.Inserir);
@@ -42,7 +43,7 @@ router.delete("/appointments/:id_appointment", jwt.ValidateToken, controllerAppo
 
 // router.post("/users/login", controllerClient.Login);
 // router.get("/users/profile", jwt.ValidateToken, controllerUser.ProfileAdmin);
-// router.put("/users/:id_user", jwt.ValidateToken, controllerUser.Editar);
+
 // router.delete("/users/:id_user", jwt.ValidateToken, controllerUser.Excluir);
 
 
