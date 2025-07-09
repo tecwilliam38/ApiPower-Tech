@@ -40,10 +40,7 @@ router.delete("/appointments/:id_appointment", jwt.ValidateToken, controllerAppo
 // router.delete("/doctors/:id_doctor", jwt.ValidateToken, controllerDoctor.Excluir);
 // router.get("/doctors/:id_doctor/services", jwt.ValidateToken, controllerDoctor.ListarServicos);
 // router.put("/tecnicos/:id_tecnico", jwt.ValidateToken, controllerTecnico.Editar);
-// router.delete("/tecnicos/:id_tecnico", jwt.ValidateToken, controllerTecnico.Excluir);
-
-// router.post("/users/login", controllerClient.Login);
-// router.get("/users/profile", jwt.ValidateToken, controllerUser.ProfileAdmin);
+// router.delete("/tecnicos/:id_tecnico", jwt.ValidateToken, controllerTecnico.Excluir);;
 
 // router.delete("/users/:id_user", jwt.ValidateToken, controllerUser.Excluir);
 
