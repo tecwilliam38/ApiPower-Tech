@@ -49,7 +49,8 @@ async function Excluir(req, res) {
 }
 async function Buscar(req, res) {
 
-    const { termo } = req.query;
+    const { termo } = req.body;
+    // const { termo } = req.query;
     try {
         const resultado = await serviceClient.Buscar(termo);
         res.status(200).json(resultado);
