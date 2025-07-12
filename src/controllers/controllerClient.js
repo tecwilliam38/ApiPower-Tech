@@ -52,7 +52,7 @@ async function Buscar(req, res) {
     const { termo } = req.query;
     try {
         const resultado = await serviceClient.Buscar(termo);
-        res.json(resultado);
+        res.status(200).json(resultado);
     } catch (err) {
         console.error(err);
         res.status(500).send('Erro ao buscar clientes');
