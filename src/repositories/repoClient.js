@@ -75,6 +75,17 @@ async function Excluir(id_client) {
     return { id_client };
 }
 
+async function Buscar(termo) {
+    try {
+        const sql = `SELECT id_client, name, email, phone_number
+                     FROM powertech_client
+                     WHERE name ILIKE $1 OR email ILIKE $1`;
+        const resultado = await pool.query(sql, [`%${termo}%`]);
+        return resultado.rows;
+    } catch (error) {
+        console.error('Erro ao buscar clientes:', error);
+        throw error;
+    }
+}
 
-
-export default { Inserir, Listar, Editar, Excluir, Profile }
+export default { Inserir, Listar, Editar, Excluir, Profile, Buscar }

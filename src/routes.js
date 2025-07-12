@@ -24,6 +24,8 @@ router.get("/tecnicos/:id_tecnico/services", jwt.ValidateToken, controllerTecnic
 router.get("/client/listar", jwt.ValidateToken, controllerClient.Listar);
 router.post("/client/register", controllerClient.Inserir);
 router.put("/client/:id_client", jwt.ValidateToken, controllerClient.Editar);
+router.get('/clientes/buscar', jwt.ValidateToken, controllerClient.Buscar );
+
 
 // Appointments
 router.post("/appointments/insert", jwt.ValidateToken, controllerAppointment.Inserir);

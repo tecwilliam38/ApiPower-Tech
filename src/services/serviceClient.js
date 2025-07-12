@@ -42,5 +42,14 @@ async function Excluir(id_client) {
 
     return client;
 }
+async function Buscar(termo) {
+    try {
+        const resultado = await repoClient.Buscar(termo);
+        return resultado;
+    } catch (err) {
+        console.error(err);
+        throw new Error('Erro ao buscar clientes');
+    }
+}
 
-export default { Inserir, Listar, Editar, Excluir, Profile }
+export default { Inserir, Listar, Editar, Excluir, Profile, Buscar }
