@@ -6,9 +6,10 @@ create table
     password text
   );
 
-create table admins (
+create table powertech_admin (
     id_admin   bigint primary key generated always as identity,
     name      VARCHAR (50),
+
     email     VARCHAR (100),
     password  VARCHAR (100) 
 );
