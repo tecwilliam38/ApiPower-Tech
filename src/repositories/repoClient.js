@@ -77,7 +77,8 @@ async function Excluir(id_client) {
 
 async function Buscar(termo) {
     try {
-        const sql = `SELECT id_client, name, email, phone_contato
+        const sql = `SELECT id_client, name, doc_id as inep, endereco_rua, endereco_bairro, 
+    task as tarefa, endereco_cidade, phone_contato, email
                      FROM powertech_client
                      WHERE name ILIKE $1 OR email ILIKE $1`;
         const resultado = await pool.query(sql, [`%${termo}%`]);
