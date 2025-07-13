@@ -35,6 +35,13 @@ router.put("/appointments/edit/:id_appointment", jwt.ValidateToken, controllerAp
 router.delete("/appointments/:id_appointment", jwt.ValidateToken, controllerAppointment.Excluir);
 
 
+// Mapa belford roxo
+router.get('/amostragem', async (req, res) => {
+  const { rows } = await pool.query('SELECT * FROM mapa_votacao ORDER BY bairro;');
+  res.json(rows);
+});
+
+
 // Doctors...
 // router.get("/doctors", jwt.ValidateToken, controllerDoctor.Listar);
 // router.post("/doctors", jwt.ValidateToken, controllerDoctor.Inserir);
