@@ -7,6 +7,7 @@ import controllerAdmin from "./controllers/controllerAdmin.js";
 import controllerTecnico from "./controllers/controllerTecnico.js";
 import controllerAppointment from "./controllers/controllerAppointment.js";
 import controllerClient from "./controllers/controllerClient.js";
+import pool from "./database/pool.index.js";
 
 const router = Router();
 // Rotas do Admin...
