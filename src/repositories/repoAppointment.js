@@ -67,7 +67,7 @@ where pa.id_appointment = $1 `;
 
     return appointments.rows[0];
 }
-async function Inserir(id_client, id_tecnico, id_service, status booking_date, booking_hour) {
+async function Inserir(id_client, id_tecnico, id_service, status, booking_date, booking_hour) {
 
     let sql = `insert into powertech_appointments(id_client,
          id_tecnico, id_service, status, booking_date, booking_hour) 
