@@ -30,11 +30,11 @@ async function ListarId(req, res) {
 async function Inserir(req, res) {
 
     // const id_client = req.id_client;
-    const {id_client, id_tecnico, id_service,
+    const {id_client, id_tecnico, id_service, status,
         booking_date, booking_hour } = req.body;
 
     const appointment = await serviceAppointment.Inserir(id_client,
-        id_tecnico, id_service, booking_date, booking_hour);
+        id_tecnico, id_service, status, booking_date, booking_hour);
 
     res.status(201).json(appointment);
 }
@@ -63,11 +63,11 @@ async function InserirAdmin(req, res) {
 async function EditarAdmin(req, res) {
 
     const id_appointment = req.params.id_appointment;
-    const { id_client, id_tecnico, id_service,
+    const { id_client, id_tecnico, id_service, status,
         booking_date, booking_hour } = req.body;
 
     const appointment = await serviceAppointment.Editar(id_appointment, id_client,
-        id_tecnico, id_service, booking_date, booking_hour);
+        id_tecnico, id_service,status, booking_date, booking_hour);
 
     res.status(200).json(appointment);
 }

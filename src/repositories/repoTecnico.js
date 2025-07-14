@@ -40,7 +40,8 @@ async function InserirAdmin(name, email, phone_number, password, created_at, upd
             const query = 'SELECT count(*) FROM powertech_admin WHERE email = $1';
             const result = await pool.query(query, [email]);
 
-            return result.rows[0].count > 0; // Retorna true se o email já existe
+            return Number(result.rows[0].count) > 0;
+// Retorna true se o email já existe
         } catch (error) {
             console.error('Erro ao verificar email:', error);
             return false;

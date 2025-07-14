@@ -14,9 +14,9 @@ async function ListarId(id_appointment) {
     return appointments;
 }
 
-async function Inserir(id_client, id_tecnico, id_service,booking_date, booking_hour) {
+async function Inserir(id_client, id_tecnico, id_service,status, booking_date, booking_hour) {
     const appointment = await repoAppointment.Inserir(id_client,
-        id_tecnico, id_service, booking_date, booking_hour);
+        id_tecnico, id_service, status, booking_date, booking_hour);
     return appointment;
 }
 
@@ -28,10 +28,10 @@ async function Excluir(id_client, id_appointment) {
 }
 
 async function Editar(id_appointment, id_client,
-    id_tecnico, id_service, booking_date, booking_hour) {
+    id_tecnico, id_service,status, booking_date, booking_hour) {
 
     const appointment = await repoAppointment.Editar(id_appointment, id_client,
-        id_tecnico, id_service, booking_date, booking_hour);
+        id_tecnico, id_service,status, booking_date, booking_hour);
 
     return appointment;
 }

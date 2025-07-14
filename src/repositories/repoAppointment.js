@@ -38,7 +38,7 @@ async function Listar(id_client, dt_start, dt_end, id_tecnico, status) {
         filtro.push(id_tecnico);
         sql += " AND pa.id_tecnico = $" + filtro.length;
     }
-    if (status){
+    if (status) {
         filtro.push(status);
         sql += " AND pa.status = $" + filtro.length;
     }
@@ -63,18 +63,18 @@ left join powertech_tecnicos_services pts on (pts.id_tecnico = pa.id_tecnico and
                         pts.id_service = pa.id_service)
 where pa.id_appointment = $1 `;
 
-    const appointments = await pool.query(sql, [id_appointment]);   
+    const appointments = await pool.query(sql, [id_appointment]);
 
     return appointments.rows[0];
 }
-async function Inserir(id_client, id_tecnico, id_service, booking_date, booking_hour) {
+async function Inserir(id_client, id_tecnico, id_service, status booking_date, booking_hour) {
 
     let sql = `insert into powertech_appointments(id_client,
-         id_tecnico, id_service, booking_date, booking_hour) 
-         values($1, $2, $3, $4, $5) returning id_appointment`;
+         id_tecnico, id_service, status, booking_date, booking_hour) 
+         values($1, $2, $3, $4, $5, $6) returning id_appointment`;
     try {
         const appointment = await pool.query(sql, [id_client,
-            id_tecnico, id_service, booking_date, booking_hour]);
+            id_tecnico, id_service, status, booking_date, booking_hour]);
 
         return appointment.rows[0];
     } catch (err) {
@@ -84,14 +84,14 @@ async function Inserir(id_client, id_tecnico, id_service, booking_date, booking_
 }
 
 async function Editar(id_appointment, id_client,
-    id_tecnico, id_service, booking_date, booking_hour) {
+    id_tecnico, id_service, status, booking_date, booking_hour) {
 
     let sql = `update powertech_appointments set id_client=$1, id_tecnico=$2, 
-     id_service=$3, booking_date=$4, booking_hour=$5 
-     where id_appointment=$6`;
+     id_service=$3, status =$4, booking_date=$5, booking_hour=$6 
+     where id_appointment=$7`;
 
     await pool.query(sql, [id_client,
-        id_tecnico, id_service, booking_date, booking_hour, id_appointment]);
+        id_tecnico, id_service, status, booking_date, booking_hour, id_appointment]);
 
     return { id_appointment };
 }
