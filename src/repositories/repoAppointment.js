@@ -1,13 +1,13 @@
 import pool from "../database/pool.index.js";
 
-async function Listar(id_client, dt_start, dt_end, id_tecnico) {
+async function Listar(id_client, dt_start, dt_end, id_tecnico, status) {
 
     let filtro = [];
 
     let sql = `select pa.id_appointment, ps.description as service, 
     pt.name as tecnico, pt.specialty,
    pa.booking_date, pa.booking_hour, pts.price as preco, pc.name as cliente,
-   pa.id_service, pa.id_client
+   pa.id_service, pa.status, pa.id_client
    from powertech_appointments pa
    join powertech_services ps on (ps.id_service = pa.id_service)
    join powertech_tecnicos pt on (pt.id_tecnico = pa.id_tecnico)
@@ -38,6 +38,10 @@ async function Listar(id_client, dt_start, dt_end, id_tecnico) {
         filtro.push(id_tecnico);
         sql += " AND pa.id_tecnico = $" + filtro.length;
     }
+    if (status){
+        filtro.push(status);
+        sql += " AND pa.status = $" + filtro.length;
+    }
 
     sql += " order by pa.booking_date, pa.booking_hour";
 
@@ -50,7 +54,7 @@ async function ListarId(id_appointment) {
     let sql = `select pa.id_appointment, s.description as service, 
     pt.name as tecnico, pt.specialty,
    pa.booking_date, pa.booking_hour, pc.name as client, pts.price, pa.id_tecnico, 
-   pa.id_service, pa.id_client
+   pa.id_service,pa.status, pa.id_client
 from powertech_appointments pa
 join powertech_services s on (s.id_service = pa.id_service)
 join powertech_tecnicos pt on (pt.id_tecnico = pa.id_tecnico)
