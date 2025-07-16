@@ -7,18 +7,18 @@ async function Listar(id_client, dt_start, dt_end, id_tecnico) {
     return appointments;
 }
 
-async function ListarId(id_tecnico) {
+// async function ListarId(id_tecnico) {
 
-    const appointments = await repoAppointment.ListarId(id_tecnico);
-
-    return appointments;
-}
-// async function ListarId(id_appointment) {
-
-//     const appointments = await repoAppointment.ListarId(id_appointment);
+//     const appointments = await repoAppointment.ListarId(id_tecnico);
 
 //     return appointments;
 // }
+async function ListarId(id_appointment) {
+
+    const appointments = await repoAppointment.ListarId(id_appointment);
+
+    return appointments;
+}
 
 async function Inserir(id_client, id_tecnico, id_service,status, booking_date, booking_hour) {
     const appointment = await repoAppointment.Inserir(id_client,

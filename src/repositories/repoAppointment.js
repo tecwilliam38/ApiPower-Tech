@@ -49,7 +49,7 @@ async function Listar(id_client, dt_start, dt_end, id_tecnico, status) {
 
     return appointments.rows;
 }
-async function ListarId(id_tecnico) {
+async function ListarId(id_user) {
 
     let sql = `select pa.id_appointment, s.description as service, 
     pt.name as tecnico, pt.specialty,
@@ -61,10 +61,10 @@ join powertech_tecnicos pt on (pt.id_tecnico = pa.id_tecnico)
 join powertech_client pc on (pc.id_client = pa.id_client)
 left join powertech_tecnicos_services pts on (pts.id_tecnico = pa.id_tecnico and 
                         pts.id_service = pa.id_service)
-where pa.id_tecnico = $1
+where pa.id_user = $1
 order by a.booking_date, a.booking_hour  `;
 
-    const appointments = await pool.query(sql, [id_tecnico]);
+    const appointments = await pool.query(sql, [id_user]);
 
     return appointments.rows[0];
 }
