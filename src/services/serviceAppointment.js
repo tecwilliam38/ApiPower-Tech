@@ -7,12 +7,6 @@ async function Listar(id_client, dt_start, dt_end, id_tecnico) {
     return appointments;
 }
 
-// async function ListarId(id_tecnico) {
-
-//     const appointments = await repoAppointment.ListarId(id_tecnico);
-
-//     return appointments;
-// }
 async function ListarId(id_appointment) {
 
     const appointments = await repoAppointment.ListarId(id_appointment);

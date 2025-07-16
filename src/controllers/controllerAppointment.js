@@ -16,7 +16,8 @@ async function Listar(req, res) {
     const dt_end = req.query.dt_end;
     const id_tecnico = req.query.id_tecnico;
 
-    const appointments = await serviceAppointment.Listar("", dt_start, dt_end, id_tecnico);
+    // const appointments = await serviceAppointment.Listar("", dt_start, dt_end, id_tecnico);
+    const appointments = await serviceAppointment.Listar(0, dt_start, dt_end, id_tecnico);
 
     res.status(200).json(appointments);
 }
