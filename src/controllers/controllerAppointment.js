@@ -4,7 +4,7 @@ async function ListarByUser(req, res) {
 
     // const id_tecnico = req.id_tecnico;
     // const appointments = await serviceAppointment.Listar(id_tecnico);
-    const id_tecnico = req.id_user;
+    const id_user = req.id_user;
     const appointments = await serviceAppointment.Listar(id_user);
 
     res.status(200).json(appointments);
