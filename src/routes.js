@@ -30,7 +30,8 @@ router.post('/client/buscar', jwt.ValidateToken, controllerClient.Buscar );
 
 // Appointments
 router.post("/appointments/insert", jwt.ValidateToken, controllerAppointment.Inserir);
-router.get("/appointments/listar", jwt.ValidateToken, controllerAppointment.ListarByUser);
+// router.get("/appointments/listar", jwt.ValidateToken, controllerAppointment.ListarByUser);
+router.get("/appointments/listar", jwt.ValidateToken, controllerAppointment.Listar);
 router.get("/appointments/listar/:id_appointment", jwt.ValidateToken, controllerAppointment.ListarId);
 router.put("/appointments/edit/:id_appointment", jwt.ValidateToken, controllerAppointment.EditarAdmin);
 router.delete("/appointments/:id_appointment", jwt.ValidateToken, controllerAppointment.Excluir);
